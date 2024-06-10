@@ -1,1 +1,1 @@
-This contains the code for the UI that is developed using React.
+This contains the code for our applications UI which is developed through React.
