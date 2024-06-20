@@ -1,4 +1,6 @@
 import numpy as np
+
+
 # import matplotlib.pyplot as plt
 
 def estimate_project_risk(cost_mean, cost_stddev, loc_mean, loc_stddev,
@@ -60,8 +62,8 @@ def estimate_project_risk(cost_mean, cost_stddev, loc_mean, loc_stddev,
     median_risk = np.median(risks)
     percentile_95 = np.percentile(risks, 95)
 
-
     return mean_risk, median_risk, percentile_95, risks
+
 
 # Example usage
 mean_risk, median_risk, percentile_95, risks = estimate_project_risk(
@@ -72,14 +74,14 @@ mean_risk, median_risk, percentile_95, risks = estimate_project_risk(
     complexity_mean=20, complexity_stddev=5,
     num_simulations=10000
 )
- # Print results
+# Print results
 print(f"Mean overall risk: {mean_risk:.2f}")
 print(f"Median overall risk: {median_risk:.2f}")
 print(f"95th percentile of overall risk: {percentile_95:.2f}")
 
-    # Plot the distribution of results
-    # plt.hist(risks, bins=50, edgecolor='black')
-    # plt.title('Distribution of Project Risk')
-    # plt.xlabel('Overall Risk')
-    # plt.ylabel('Frequency')
-    # plt.show()
+# Plot the distribution of results
+# plt.hist(risks, bins=50, edgecolor='black')
+# plt.title('Distribution of Project Risk')
+# plt.xlabel('Overall Risk')
+# plt.ylabel('Frequency')
+# plt.show()
