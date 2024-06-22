@@ -91,3 +91,71 @@ def main(salary: int, productivity: int, min_loc: int, max_loc: int, coding_lang
         code_coverage_array, code_coverage_mean,
         risk_array, risk_mean
         )
+
+
+
+
+# test
+
+# Define the parameters
+salary = 50000
+productivity = productivity_professional  # Using professional productivity level
+min_loc = 10000
+max_loc = 20000
+coding_language = "python"
+project_type = "Embedded"  # Assuming a medium difficulty project
+
+min_fp = 100
+max_fp = 200
+external_inputs = 10
+external_outputs = 10
+inquiries = 5
+external_files = 3
+internal_files = 5
+
+min_test_cases = 500
+max_test_cases = 1000
+min_success_rate = 0.8
+max_success_rate = 0.9
+
+min_internal_cost = 100000
+max_internal_cost = 200000
+external_resources = False
+min_external_cost = 20000
+max_external_cost = 50000
+
+num_simulations = 1000
+
+# Call the main function with the defined parameters
+results = main(
+    salary, productivity, min_loc, max_loc, coding_language, project_type,
+    min_fp, max_fp, external_inputs, external_outputs, inquiries, external_files, internal_files,
+    min_test_cases, max_test_cases, min_success_rate, max_success_rate, min_internal_cost, max_internal_cost,
+    external_resources, min_external_cost, max_external_cost, num_simulations
+)
+
+# Print the results
+(
+    loc_array, loc_mean,
+    time_array, time_mean,
+    complexity_array, complexity_mean,
+    num_people_array, num_people_mean,
+    cost_array, cost_mean,
+    code_coverage_array, code_coverage_mean,
+    risk_array, risk_mean
+) = results
+
+# print("Lines of Code (LOC) Predictions:", loc_array)
+print("Mean LOC:", loc_mean)
+# print("Development Time Predictions:", time_array)
+print("Mean Development Time:", time_mean)
+# print("Complexity Predictions:", complexity_array)
+print("Mean Complexity:", complexity_mean)
+# print("Number of People Predictions:", num_people_array)
+print("Mean Number of People:", num_people_mean)
+# print("Cost Predictions:", cost_array)
+print("Mean Cost:", cost_mean)
+print("Code Coverage Predictions:", code_coverage_array)
+print("Mean Code Coverage:", code_coverage_mean)
+# print("Project Risk Predictions:", risk_array)
+print("Mean Project Risk:", risk_mean)

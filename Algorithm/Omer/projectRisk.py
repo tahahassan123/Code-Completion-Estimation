@@ -55,30 +55,25 @@ def estimate_project_risk(cost_mean, cost_stddev, loc_mean, loc_stddev,
         risks.append([i, overall_risk])
         get_mean.append(overall_risk)
 
-    # Convert results to a numpy array for analysis
-    risks = np.array(risks)
-
     # Analysis
     mean_risk = np.mean(get_mean)
-    median_risk = np.median(get_mean)
-    percentile_95 = np.percentile(get_mean, 95)
 
-    return risks, mean_risk, median_risk, percentile_95
+    return risks, mean_risk
 
 
 # Example usage
-risks, mean_risk, median_risk, percentile_95 = estimate_project_risk(
-    cost_mean=1000000, cost_stddev=100000,
-    loc_mean=50000, loc_stddev=5000,
-    time_mean=12, time_stddev=2,
-    num_people_mean=10, num_people_stddev=2,
-    complexity_mean=20, complexity_stddev=5,
-    num_simulations=10000
-)
+# risks, mean_risk, median_risk, percentile_95 = estimate_project_risk(
+#     cost_mean=1000000, cost_stddev=100000,
+#     loc_mean=50000, loc_stddev=5000,
+#     time_mean=12, time_stddev=2,
+#     num_people_mean=10, num_people_stddev=2,
+#     complexity_mean=20, complexity_stddev=5,
+#     num_simulations=10000
+# )
 # Print results
-print(f"Mean overall risk: {mean_risk:.2f}")
-print(f"Median overall risk: {median_risk:.2f}")
-print(f"95th percentile of overall risk: {percentile_95:.2f}")
+# print(f"Mean overall risk: {mean_risk:.2f}")
+# print(f"Median overall risk: {median_risk:.2f}")
+# print(f"95th percentile of overall risk: {percentile_95:.2f}")
 
 # Plot the distribution of results
 # plt.hist(risks, bins=50, edgecolor='black')

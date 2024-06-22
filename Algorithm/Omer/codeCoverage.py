@@ -55,25 +55,21 @@ def estimate_code_coverage(num_test_cases_min, num_test_cases_max,
         coverage_results.append([i, estimated_coverage])
         get_mean.append(estimated_coverage)
 
-    # Convert results to a numpy array for analysis
-    coverage_results = np.array(coverage_results)
-
     # Analysis
     mean_coverage = np.mean(get_mean)
-    median_coverage = np.median(coverage_results[:, 1])
-    percentile_95 = np.percentile(coverage_results[:, 1], 95)
 
-    return coverage_results, mean_coverage, median_coverage, percentile_95
+
+    return coverage_results, mean_coverage
 
 
 # Example usage with realistic values and adjusted distributions
-coverage_results, mean_cov, median_cov, percentile_95 = estimate_code_coverage(
-    num_test_cases_min=890, num_test_cases_max=4000,
-    loc_mean=600, loc_stddev=50,
-    test_success_rate_min=0.80, test_success_rate_max=0.90,
-    num_simulations=1000000
-)
+# coverage_results, mean_cov, median_cov, percentile_95 = estimate_code_coverage(
+#     num_test_cases_min=890, num_test_cases_max=4000,
+#     loc_mean=600, loc_stddev=50,
+#     test_success_rate_min=0.80, test_success_rate_max=0.90,
+#     num_simulations=1000000
+# )
 
-print(f"Mean code coverage: {mean_cov:.4f}")
-print(f"Median code coverage: {median_cov:.4f}")
-print(f"95th percentile of code coverage: {percentile_95:.4f}")
+# print(f"Mean code coverage: {mean_cov:.4f}")
+# print(f"Median code coverage: {median_cov:.4f}")
+# print(f"95th percentile of code coverage: {percentile_95:.4f}")
