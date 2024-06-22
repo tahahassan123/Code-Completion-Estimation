@@ -71,10 +71,10 @@ def main(salary: int, productivity: int, min_loc: int, max_loc: int, coding_lang
     complexity_array, complexity_mean, complexity_stddev = complexityEstimation.complexity_estimation(min_fp, max_fp, external_inputs, external_outputs, inquiries, external_files, internal_files, num_simulations)
 
     # Perform a Monte Carlo simulation to estimate the number of people required for a project without considering cost.
-    num_people_array, num_people_mean, num_people_stddev = numberOfPeople.estimate_number_of_people(num_simulations, time_mean, productivity, 1, loc_mean)
+    num_people_array, num_people_mean, num_people_stddev = numberOfPeople.estimate_number_of_people(num_simulations, time_mean, productivity, loc_mean, loc_stddev)
 
     # Estimating the total cost of the software project
-    cost_array, cost_mean, cost_stddev = costEstimation.cost_estimation(salary, num_people_mean, min_internal_cost, max_internal_cost, num_simulations, external_resources, min_external_cost, max_external_cost)
+    cost_array, cost_mean, cost_stddev = costEstimation.cost_estimation(salary, num_people_mean, min_internal_cost, max_internal_cost, external_resources, min_external_cost, max_external_cost, num_simulations)
 
     # Estimate code coverage using Monte Carlo simulation
     code_coverage_array, code_coverage_mean = codeCoverage.estimate_code_coverage(min_test_cases, max_test_cases, loc_mean, loc_stddev, min_success_rate, max_success_rate, num_simulations)

@@ -1,7 +1,7 @@
 import numpy as np
 
 def estimate_number_of_people(num_simulations=1000, project_duration=12,
-                                      productivity_mean=100, productivity_stddev=10,
+                                      productivity=50,
                                       loc_mean=50000, loc_stddev=5000):
     """
     Perform a Monte Carlo simulation to estimate the number of people required for a project without considering cost.
@@ -25,7 +25,7 @@ def estimate_number_of_people(num_simulations=1000, project_duration=12,
     get_mean = []
     for i in range(num_simulations):
         # Sample from normal distributions
-        productivity = np.random.normal(productivity_mean, productivity_stddev)
+        # productivity = np.random.normal(productivity_mean, productivity_stddev)
         scope_complexity = np.random.normal(loc_mean, loc_stddev)
 
         # Calculate total work and work per person
