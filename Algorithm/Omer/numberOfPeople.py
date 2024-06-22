@@ -43,17 +43,3 @@ def estimate_number_of_people(num_simulations=1000, project_duration=12,
     return results, mean_people, num_people_stddev
 
 
-# Example usage
-# results, mean_people, num_people_stddev = estimate_number_of_people()
-
-# print(f"Mean number of people required: {mean_people:.2f}")
-# print(f"Median number of people required: {median_people:.2f}")
-# print(f"95th percentile: {percentile_95:.2f}")
-
-# Plot the distribution of results
-# import matplotlib.pyplot as plt
-# plt.hist(results, bins=50, edgecolor='black')
-# plt.title('Distribution of Number of People Needed')
-# plt.xlabel('Number of People')
-# plt.ylabel('Frequency')
-# plt.show()

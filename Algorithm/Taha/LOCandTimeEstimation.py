@@ -88,10 +88,5 @@ def LOCandDevelopmentTime_estimation(min_loc: int, max_loc: int, language: str,
 
 
 loc, mean, time, time_mean, locstd, timestd = LOCandDevelopmentTime_estimation(100, 5000, "python", "Embedded", 1000)
-# print(loc)
-# print("Mean LOC =", mean)
-# print(time)
-# print("Mean Time =", time_mean, "Months")
-# print("LOC standard deviation =", locstd)
-# print("Time standard deviation =", timestd)
+
 

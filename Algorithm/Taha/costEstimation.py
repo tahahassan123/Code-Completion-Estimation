@@ -40,12 +40,3 @@ def cost_estimation(salary: int, no_people: int, min_internal_costs: int, max_in
     return results, cost_mean, cost_stddev
 
 
-# results, mean, std = cost_estimation(50000, 5, 20000, 100000, 1000)
-# print(results)
-# print("Mean Cost =", mean)
-# print("Standard deviation =", std)
-
-# results2, mean2, std2 = cost_estimation(50000, 5, 20000, 100000, 1000, True, 10000, 70000)
-# print(results2)
-# print("Mean Cost 2 =", mean2)
-# print("Standard deviation 2 =", std2)

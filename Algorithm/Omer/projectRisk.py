@@ -61,23 +61,3 @@ def estimate_project_risk(cost_mean, cost_stddev, loc_mean, loc_stddev,
     return risks, mean_risk
 
 
-# Example usage
-# risks, mean_risk, median_risk, percentile_95 = estimate_project_risk(
-#     cost_mean=1000000, cost_stddev=100000,
-#     loc_mean=50000, loc_stddev=5000,
-#     time_mean=12, time_stddev=2,
-#     num_people_mean=10, num_people_stddev=2,
-#     complexity_mean=20, complexity_stddev=5,
-#     num_simulations=10000
-# )
-# Print results
-# print(f"Mean overall risk: {mean_risk:.2f}")
-# print(f"Median overall risk: {median_risk:.2f}")
-# print(f"95th percentile of overall risk: {percentile_95:.2f}")
-
-# Plot the distribution of results
-# plt.hist(risks, bins=50, edgecolor='black')
-# plt.title('Distribution of Project Risk')
-# plt.xlabel('Overall Risk')
-# plt.ylabel('Frequency')
-# plt.show()
