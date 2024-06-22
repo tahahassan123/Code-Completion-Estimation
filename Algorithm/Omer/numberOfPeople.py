@@ -1,13 +1,13 @@
 import numpy as np
 
-def estimate_number_of_people(num_simulations=10000, project_duration=12,
+def estimate_number_of_people(num_simulations=1000, project_duration=12,
                                       productivity_mean=100, productivity_stddev=10,
                                       loc_mean=50000, loc_stddev=5000):
     """
     Perform a Monte Carlo simulation to estimate the number of people required for a project without considering cost.
     
     Parameters:
-    - num_simulations: Number of Monte Carlo iterations
+    - num_simulations: Number of Monte Carlo iterations (default is 1000)
     - project_duration: Project duration in months
     - productivity_mean: Mean of productivity (lines of code per developer per day)
     - productivity_stddev: Standard deviation of productivity
@@ -22,8 +22,8 @@ def estimate_number_of_people(num_simulations=10000, project_duration=12,
     """
     
     results = []
-
-    for _ in range(num_simulations):
+    get_mean = []
+    for i in range(num_simulations):
         # Sample from normal distributions
         productivity = np.random.normal(productivity_mean, productivity_stddev)
         scope_complexity = np.random.normal(loc_mean, loc_stddev)
@@ -33,20 +33,21 @@ def estimate_number_of_people(num_simulations=10000, project_duration=12,
         work_per_person = productivity * project_duration * 30  # Assuming 30 working days per month
         num_people_required = total_work / work_per_person
 
-        results.append(num_people_required)
+        results.append([i, num_people_required])
+        get_mean.append(num_people_required)
 
     # Convert results to a numpy array for analysis
     results = np.array(results)
 
     # Analysis
-    mean_people = np.mean(results)
-    median_people = np.median(results)
-    percentile_95 = np.percentile(results, 95)
+    mean_people = np.mean(get_mean)
+    median_people = np.median(get_mean)
+    percentile_95 = np.percentile(get_mean, 95)
 
-    return mean_people, median_people, percentile_95, results
+    return results, mean_people, median_people, percentile_95
 
 # Example usage
-mean_people, median_people, percentile_95, results = estimate_number_of_people()
+results, mean_people, median_people, percentile_95 = estimate_number_of_people()
 
 print(f"Mean number of people required: {mean_people:.2f}")
 print(f"Median number of people required: {median_people:.2f}")

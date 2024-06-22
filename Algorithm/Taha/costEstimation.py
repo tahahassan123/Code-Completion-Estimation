@@ -1,8 +1,8 @@
 import numpy as np
 
 
-def cost_estimation(salary: int, no_people: int, min_internal_costs: int, max_internal_costs: int, num_simulations: int,
-                    external_resources=False, min_external_costs=0, max_external_costs=0):
+def cost_estimation(salary: int, no_people: int, min_internal_costs: int, max_internal_costs: int,
+                    external_resources=False, min_external_costs=0, max_external_costs=0, num_simulations=10000):
     """
     Estimating the total cost of the software project
 

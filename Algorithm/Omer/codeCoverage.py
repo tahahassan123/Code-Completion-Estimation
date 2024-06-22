@@ -4,7 +4,7 @@ import numpy as np
 def estimate_code_coverage(num_test_cases_mean, num_test_cases_stddev,
                            loc_mean, loc_stddev,
                            test_success_rate_mean, test_success_rate_stddev,
-                           num_simulations=10000):
+                           num_simulations=1000):
     """
     Estimate code coverage using Monte Carlo simulation.
 
@@ -15,7 +15,7 @@ def estimate_code_coverage(num_test_cases_mean, num_test_cases_stddev,
     - loc_stddev: Standard deviation of codebase size.
     - test_success_rate_mean: Mean success rate of test cases (0 to 1).
     - test_success_rate_stddev: Standard deviation of test success rate.
-    - num_simulations: Number of Monte Carlo iterations (default is 10000).
+    - num_simulations: Number of Monte Carlo iterations (default is 1000).
 
     Returns:
     - mean_coverage: Mean estimated code coverage.
@@ -26,8 +26,9 @@ def estimate_code_coverage(num_test_cases_mean, num_test_cases_stddev,
 
     # Monte Carlo Simulation
     coverage_results = []
+    get_mean = []
 
-    for _ in range(num_simulations):
+    for i in range(num_simulations):
         # Sample from truncated normal distributions to ensure non-negative values
         num_test_cases = np.random.normal(num_test_cases_mean, num_test_cases_stddev)
         num_test_cases = max(1, num_test_cases)  # Ensure at least 1 test case
@@ -44,21 +45,22 @@ def estimate_code_coverage(num_test_cases_mean, num_test_cases_stddev,
         # Cap coverage at 100% if calculated value exceeds 1
         estimated_coverage = min(1, estimated_coverage)
 
-        coverage_results.append(estimated_coverage)
+        coverage_results.append([i, estimated_coverage])
+        get_mean.append(estimated_coverage)
 
     # Convert results to a numpy array for analysis
     coverage_results = np.array(coverage_results)
 
     # Analysis
-    mean_coverage = np.mean(coverage_results)
+    mean_coverage = np.mean(get_mean)
     median_coverage = np.median(coverage_results)
     percentile_95 = np.percentile(coverage_results, 95)
 
-    return mean_coverage, median_coverage, percentile_95, coverage_results
+    return coverage_results, mean_coverage, median_coverage, percentile_95
 
 
 # Example usage with realistic values and adjusted distributions
-mean_cov, median_cov, percentile_95, coverage_results = estimate_code_coverage(
+coverage_results, mean_cov, median_cov, percentile_95  = estimate_code_coverage(
     num_test_cases_mean=150, num_test_cases_stddev=30,
     loc_mean=6000, loc_stddev=700,
     test_success_rate_mean=0.85, test_success_rate_stddev=0.05,

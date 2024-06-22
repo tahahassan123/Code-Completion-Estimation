@@ -1,9 +1,43 @@
 import numpy as np
-import developmentTimeEstimation as devtime
+
+
+def time_estimation(loc, project_type: str):
+
+    """
+    Estimating Development time using Basic COCOMO model
+
+    Parameters:
+    - loc: the LOC (Lines Of Code) of the software project
+    - project_type: the type of project, it indicates the difficulty of the project
+
+    Returns:
+    - time: the estimated development time
+
+    """
+
+    a, b, c, d = 0, 0, 0, 0
+    kloc = loc / 1000
+    if project_type == "Organic":
+        a, b, c, d = 2.4, 1.05, 2.5, 0.38
+    elif project_type == "Semi-detached":
+        a, b, c, d = 3, 1.12, 2.5, 0.35
+    elif project_type == "Embedded":
+        a, b, c, d = 3.6, 1.20, 2.5, 0.32
+    else:
+        print("project type value incorrect")
+
+    effort = a * pow(kloc, b)
+    time = c * pow(effort, d)
+
+    return time
+
+
+time = time_estimation(1800, "Semi-detached")
+print("Time is =", time)
 
 
 def LOCandDevelopmentTime_estimation(min_loc: int, max_loc: int, language: str,
-                                     project_type: str, num_simulations: int):
+                                     project_type: str, num_simulations=1000):
     """
     Estimating LOC and Development time using Monte Carlo Simulation and Basic COCOMO model
 
@@ -39,7 +73,7 @@ def LOCandDevelopmentTime_estimation(min_loc: int, max_loc: int, language: str,
     for i in range(num_simulations):
         avg_loc = np.random.uniform(min_loc, max_loc)
         loc = ((min_loc + (4 * avg_loc) + max_loc) / 6) * language_multipliers.get(language)
-        time = devtime.time_estimation(loc, project_type)
+        time = time_estimation(loc, project_type)
 
         loc_results.append([i, loc])
         loc_get_mean.append(loc)
@@ -56,3 +90,5 @@ print(loc)
 print("Mean LOC =", mean)
 print(time)
 print("Mean Time =", time_mean, "Months")
+
+

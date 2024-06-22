@@ -2,7 +2,7 @@ import numpy as np
 
 
 def complexity_estimation(min_fp, max_fp, external_inputs: int, external_outputs: int, inquiries: int,
-                          external_files: int, internal_files: int, num_simulations: int):
+                          external_files: int, internal_files: int, num_simulations=1000):
     """
     Estimate the complexity through Monte Carlo simulation and COCOMO model
 

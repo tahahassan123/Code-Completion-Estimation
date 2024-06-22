@@ -5,7 +5,7 @@ import numpy as np
 
 def estimate_project_risk(cost_mean, cost_stddev, loc_mean, loc_stddev,
                           time_mean, time_stddev, num_people_mean, num_people_stddev,
-                          complexity_mean, complexity_stddev, num_simulations=10000):
+                          complexity_mean, complexity_stddev, num_simulations=1000):
     """
     Estimate project risk using Monte Carlo simulation.
 
@@ -20,7 +20,7 @@ def estimate_project_risk(cost_mean, cost_stddev, loc_mean, loc_stddev,
     - num_people_stddev: Standard deviation of number of people.
     - complexity_mean: Mean software complexity (e.g., cyclomatic complexity).
     - complexity_stddev: Standard deviation of software complexity.
-    - num_simulations: Number of Monte Carlo iterations (default is 10000).
+    - num_simulations: Number of Monte Carlo iterations (default is 1000).
 
     Returns:
     - mean_risk: Mean overall project risk.
@@ -31,8 +31,8 @@ def estimate_project_risk(cost_mean, cost_stddev, loc_mean, loc_stddev,
 
     # Monte Carlo Simulation
     risks = []
-
-    for _ in range(num_simulations):
+    get_mean = []
+    for i in range(num_simulations):
         # Sample from normal distributions
         cost = np.random.normal(cost_mean, cost_stddev)
         loc = np.random.normal(loc_mean, loc_stddev)
@@ -52,21 +52,22 @@ def estimate_project_risk(cost_mean, cost_stddev, loc_mean, loc_stddev,
         # Aggregate overall risk (simple example)
         overall_risk = budget_risk + schedule_risk + resource_risk + complexity_risk
 
-        risks.append(overall_risk)
+        risks.append([i, overall_risk])
+        get_mean.append(overall_risk)
 
     # Convert results to a numpy array for analysis
     risks = np.array(risks)
 
     # Analysis
-    mean_risk = np.mean(risks)
-    median_risk = np.median(risks)
-    percentile_95 = np.percentile(risks, 95)
+    mean_risk = np.mean(get_mean)
+    median_risk = np.median(get_mean)
+    percentile_95 = np.percentile(get_mean, 95)
 
-    return mean_risk, median_risk, percentile_95, risks
+    return risks, mean_risk, median_risk, percentile_95
 
 
 # Example usage
-mean_risk, median_risk, percentile_95, risks = estimate_project_risk(
+risks, mean_risk, median_risk, percentile_95 = estimate_project_risk(
     cost_mean=1000000, cost_stddev=100000,
     loc_mean=50000, loc_stddev=5000,
     time_mean=12, time_stddev=2,
