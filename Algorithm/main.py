@@ -13,6 +13,7 @@ def main(salary: int, productivity: int, min_loc: int, max_loc: int, coding_lang
          min_fp: int, max_fp: int, external_inputs: int, external_outputs: int, inquiries: int, external_files: int,
          internal_files: int, num_test_cases: int, test_success_rate: int, min_internal_cost: int, max_internal_cost: int,
          external_resources=False, min_external_cost=0, max_external_cost=0, num_simulations=1000):
+
     """
     Estimate development time, LOC, complexity, cost, code coverage, number of developers and project risk using a combination of monte carlo simulations and COCOMO model
 
@@ -62,23 +63,24 @@ def main(salary: int, productivity: int, min_loc: int, max_loc: int, coding_lang
     - risk_mean: The mean of all the risk percentage results
 
     """
+
     # Estimating LOC and Development time using Monte Carlo Simulation and Basic COCOMO model
-    loc_array, loc_mean, time_array, time_mean = LOCandTimeEstimation.LOCandDevelopmentTime_estimation(min_loc, max_loc, coding_language, project_type, num_simulations)
+    loc_array, loc_mean, time_array, time_mean, loc_stddev, time_stddev = LOCandTimeEstimation.LOCandDevelopmentTime_estimation(min_loc, max_loc, coding_language, project_type, num_simulations)
 
     # Estimate the complexity through Monte Carlo simulation and COCOMO model
-    complexity_array, complexity_mean = complexityEstimation.complexity_estimation(min_fp, max_fp, external_inputs, external_outputs, inquiries, external_files, internal_files, num_simulations)
+    complexity_array, complexity_mean, complexity_stddev = complexityEstimation.complexity_estimation(min_fp, max_fp, external_inputs, external_outputs, inquiries, external_files, internal_files, num_simulations)
 
     # Perform a Monte Carlo simulation to estimate the number of people required for a project without considering cost.
-    num_people_array, num_people_mean = numberOfPeople.estimate_number_of_people(num_simulations, time_mean, productivity, 10, loc_mean)
+    num_people_array, num_people_mean, num_people_stddev = numberOfPeople.estimate_number_of_people(num_simulations, time_mean, productivity, 1, loc_mean)
 
     # Estimating the total cost of the software project
-    cost_array, cost_mean = costEstimation.cost_estimation(salary, num_people_mean, min_internal_cost, max_internal_cost, num_simulations, external_resources, min_external_cost, max_external_cost)
+    cost_array, cost_mean, cost_stddev = costEstimation.cost_estimation(salary, num_people_mean, min_internal_cost, max_internal_cost, num_simulations, external_resources, min_external_cost, max_external_cost)
 
     # Estimate code coverage using Monte Carlo simulation
-    code_coverage_array, code_coverage_mean = codeCoverage.estimate_code_coverage(num_test_cases, loc_mean, 10, test_success_rate, 10, num_simulations)
+    code_coverage_array, code_coverage_mean = codeCoverage.estimate_code_coverage(num_test_cases, 1, loc_mean, loc_stddev, test_success_rate, 1, num_simulations)
 
     # Estimate project risk using Monte Carlo simulation
-    risk_array, risk_mean = projectRisk.estimate_project_risk(cost_mean, 10, loc_mean, 10, time_mean, 10, num_people_mean, 10, complexity_mean, 10, num_simulations)
+    risk_array, risk_mean = projectRisk.estimate_project_risk(cost_mean, cost_stddev, loc_mean, loc_stddev, time_mean, time_stddev, num_people_mean, num_people_stddev, complexity_mean, complexity_stddev, num_simulations)
 
     return (
         loc_array, loc_mean,

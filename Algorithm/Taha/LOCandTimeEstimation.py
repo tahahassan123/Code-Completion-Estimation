@@ -81,14 +81,17 @@ def LOCandDevelopmentTime_estimation(min_loc: int, max_loc: int, language: str,
         time_get_mean.append(time)
 
     loc_mean = int(np.mean(loc_get_mean))
+    loc_std = np.std(loc_get_mean)
     mean_time = np.mean(time_get_mean)
-    return loc_results, loc_mean, time_results, mean_time
+    time_std = np.std(time_get_mean)
+    return loc_results, loc_mean, time_results, mean_time, loc_std, time_std
 
 
-loc, mean, time, time_mean = LOCandDevelopmentTime_estimation(100, 5000, "python", "Embedded", 1000)
+loc, mean, time, time_mean, locstd, timestd = LOCandDevelopmentTime_estimation(100, 5000, "python", "Embedded", 1000)
 print(loc)
 print("Mean LOC =", mean)
 print(time)
 print("Mean Time =", time_mean, "Months")
-
+print("LOC standard deviation =", locstd)
+print("Time standard deviation =", timestd)
 

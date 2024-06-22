@@ -40,14 +40,16 @@ def estimate_number_of_people(num_simulations=1000, project_duration=12,
     results = np.array(results)
 
     # Analysis
+    num_people_stddev = np.std(get_mean)
     mean_people = np.mean(get_mean)
     median_people = np.median(get_mean)
     percentile_95 = np.percentile(get_mean, 95)
 
-    return results, mean_people, median_people, percentile_95
+    return results, mean_people, num_people_stddev, median_people, percentile_95
+
 
 # Example usage
-results, mean_people, median_people, percentile_95 = estimate_number_of_people()
+results, mean_people, num_people_stddev, median_people, percentile_95 = estimate_number_of_people()
 
 print(f"Mean number of people required: {mean_people:.2f}")
 print(f"Median number of people required: {median_people:.2f}")

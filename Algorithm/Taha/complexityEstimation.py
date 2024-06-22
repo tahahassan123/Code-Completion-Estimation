@@ -43,9 +43,11 @@ def complexity_estimation(min_fp, max_fp, external_inputs: int, external_outputs
         get_mean.append(tcp)
 
     tcp_mean = np.mean(get_mean)
-    return results, tcp_mean
+    tcp_stddev = np.std(get_mean)
+    return results, tcp_mean, tcp_stddev
 
 
-results, mean = complexity_estimation(87, 168, 6, 8, 1,2, 2, 10000)
+results, mean, tcpstd = complexity_estimation(87, 168, 6, 8, 1,2, 2, 10000)
 print(results)
-print("TCP Mean =",mean)
+print("TCP Mean =", mean)
+print("TCP Standard Deviation =", tcpstd)
