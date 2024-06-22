@@ -11,7 +11,7 @@ productivity_professional = 100  # LOC (Lines Of Code) written by a professional
 
 def main(salary: int, productivity: int, min_loc: int, max_loc: int, coding_language: str, project_type: str,
          min_fp: int, max_fp: int, external_inputs: int, external_outputs: int, inquiries: int, external_files: int,
-         internal_files: int, num_test_cases: int, test_success_rate: int, min_internal_cost: int, max_internal_cost: int,
+         internal_files: int, min_test_cases: int,max_test_cases:int, min_success_rate: float,max_success_rate:float, min_internal_cost: int, max_internal_cost: int,
          external_resources=False, min_external_cost=0, max_external_cost=0, num_simulations=1000):
 
     """
@@ -77,7 +77,7 @@ def main(salary: int, productivity: int, min_loc: int, max_loc: int, coding_lang
     cost_array, cost_mean, cost_stddev = costEstimation.cost_estimation(salary, num_people_mean, min_internal_cost, max_internal_cost, num_simulations, external_resources, min_external_cost, max_external_cost)
 
     # Estimate code coverage using Monte Carlo simulation
-    code_coverage_array, code_coverage_mean = codeCoverage.estimate_code_coverage(num_test_cases, 1, loc_mean, loc_stddev, test_success_rate, 1, num_simulations)
+    code_coverage_array, code_coverage_mean = codeCoverage.estimate_code_coverage(min_test_cases, max_test_cases, loc_mean, loc_stddev, min_success_rate, max_success_rate, num_simulations)
 
     # Estimate project risk using Monte Carlo simulation
     risk_array, risk_mean = projectRisk.estimate_project_risk(cost_mean, cost_stddev, loc_mean, loc_stddev, time_mean, time_stddev, num_people_mean, num_people_stddev, complexity_mean, complexity_stddev, num_simulations)

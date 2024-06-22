@@ -1,20 +1,24 @@
 import numpy as np
 
+def calculate_mean_and_stddev(min_value, max_value):
+    mean = (min_value + max_value) / 2
+    stddev = (max_value - min_value) / 4  # Assuming range covers about 4 standard deviations
+    return mean, stddev
 
-def estimate_code_coverage(num_test_cases_mean, num_test_cases_stddev,
+def estimate_code_coverage(num_test_cases_min, num_test_cases_max,
                            loc_mean, loc_stddev,
-                           test_success_rate_mean, test_success_rate_stddev,
+                           test_success_rate_min, test_success_rate_max,
                            num_simulations=1000):
     """
     Estimate code coverage using Monte Carlo simulation.
 
     Parameters:
-    - num_test_cases_mean: Mean number of test cases.
-    - num_test_cases_stddev: Standard deviation of number of test cases.
+    - num_test_cases_min: Minimum number of test cases.
+    - num_test_cases_max: Maximum number of test cases.
     - loc_mean: Mean size of codebase (e.g., LOC).
     - loc_stddev: Standard deviation of codebase size.
-    - test_success_rate_mean: Mean success rate of test cases (0 to 1).
-    - test_success_rate_stddev: Standard deviation of test success rate.
+    - test_success_rate_min: Minimum success rate of test cases (0 to 1).
+    - test_success_rate_max: Maximum success rate of test cases (0 to 1).
     - num_simulations: Number of Monte Carlo iterations (default is 1000).
 
     Returns:
@@ -23,6 +27,9 @@ def estimate_code_coverage(num_test_cases_mean, num_test_cases_stddev,
     - percentile_95: 95th percentile of estimated code coverage.
     - coverage_results: Array of estimated code coverage from Monte Carlo simulations.
     """
+    # Calculate mean and standard deviation from min and max values
+    num_test_cases_mean, num_test_cases_stddev = calculate_mean_and_stddev(num_test_cases_min, num_test_cases_max)
+    test_success_rate_mean, test_success_rate_stddev = calculate_mean_and_stddev(test_success_rate_min, test_success_rate_max)
 
     # Monte Carlo Simulation
     coverage_results = []
@@ -53,17 +60,17 @@ def estimate_code_coverage(num_test_cases_mean, num_test_cases_stddev,
 
     # Analysis
     mean_coverage = np.mean(get_mean)
-    median_coverage = np.median(coverage_results)
-    percentile_95 = np.percentile(coverage_results, 95)
+    median_coverage = np.median(coverage_results[:, 1])
+    percentile_95 = np.percentile(coverage_results[:, 1], 95)
 
     return coverage_results, mean_coverage, median_coverage, percentile_95
 
 
 # Example usage with realistic values and adjusted distributions
-coverage_results, mean_cov, median_cov, percentile_95  = estimate_code_coverage(
-    num_test_cases_mean=150, num_test_cases_stddev=30,
-    loc_mean=6000, loc_stddev=700,
-    test_success_rate_mean=0.85, test_success_rate_stddev=0.05,
+coverage_results, mean_cov, median_cov, percentile_95 = estimate_code_coverage(
+    num_test_cases_min=890, num_test_cases_max=4000,
+    loc_mean=600, loc_stddev=50,
+    test_success_rate_min=0.80, test_success_rate_max=0.90,
     num_simulations=1000000
 )
 

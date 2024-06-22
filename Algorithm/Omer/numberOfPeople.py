@@ -30,7 +30,7 @@ def estimate_number_of_people(num_simulations=1000, project_duration=12,
 
         # Calculate total work and work per person
         total_work = scope_complexity
-        work_per_person = productivity * project_duration * 30  # Assuming 30 working days per month
+        work_per_person = productivity * project_duration * 22  # Assuming 22 working days per month
         num_people_required = total_work / work_per_person
 
         results.append([i, num_people_required])
