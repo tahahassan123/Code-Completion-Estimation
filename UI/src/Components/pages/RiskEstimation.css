@@ -1,0 +1,83 @@
+/* RiskEstimation.css */
+
+.risk-estimation-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    /* Background color for the entire page */
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 16px;
+}
+
+.description {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 24px;
+}
+
+.navigation {
+    margin-top: 20px;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    /* Button background color */
+    color: #fff;
+    /* Button text color */
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #0056b3;
+    /* Hover state background color */
+}
+
+.graph-container {
+    background: linear-gradient(45deg, #37474f, #b0bec5);
+    background-size: 200% 200%;
+    animation: backgroundShift 10s ease infinite, backgroundTransition 10s infinite alternate;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-metallic);
+}
+
+@keyframes backgroundShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes backgroundTransition {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.5;
+    }
+}

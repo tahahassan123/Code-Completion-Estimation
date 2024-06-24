@@ -1,0 +1,60 @@
+/* LOCestimation.css */
+
+.loc-estimation-container,
+.cost-estimation-container,
+.development-time-estimation-container,
+.complexity-estimation-container,
+.number-people-estimation-container {
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.loc-estimation-container h2,
+.cost-estimation-container h2,
+.development-time-estimation-container h2,
+.complexity-estimation-container h2,
+.number-people-estimation-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.loc-estimation-container p,
+.cost-estimation-container p,
+.development-time-estimation-container p,
+.complexity-estimation-container p,
+.number-people-estimation-container p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.graph-container {
+    background: linear-gradient(45deg, #37474f, #b0bec5);
+    background-size: 200% 200%;
+    animation: backgroundShift 10s ease infinite, backgroundTransition 10s infinite alternate;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-metallic);
+}
+
+@keyframes backgroundShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes backgroundTransition {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.5;
+    }
+}
